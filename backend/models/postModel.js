@@ -1,18 +1,23 @@
-import mongoose from 'mongoose'
+import mongoose from "mongoose";
 
-const postSchema = mongoose.Schema( {
+const postSchema = mongoose.Schema(
+  {
     caption: {
-        type: String,
-        required: false
+      type: String,
+      required: false,
     },
     media: {
-        type: String,
-        required: false
+      type: String,
+      required: false,
+    },
+    filter: {
+      type: String,
+      required: false,
+    },
+  },
+  {
+    timestamps: true,
+  },
+);
 
-    }
-}, {
-    timestamps: true
-} )
-
-
-export const Post = mongoose.model( 'post', postSchema )
+export const Post = mongoose.model("post", postSchema);

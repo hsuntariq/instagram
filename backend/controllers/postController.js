@@ -1,35 +1,26 @@
-import { Post } from "../models/postModel.js"
+import { Post } from "../models/postModel.js";
 
-export const addPost = async ( req, res ) => {
+export const addPost = async (req, res) => {
+  const { media, caption, filter } = req.body;
 
+  const newPost = await Post.create({
+    caption,
+    media,
+    filter,
+  });
 
-    const { media, caption } = req.body
+  res.send(newPost);
+};
 
-    const newPost = await Post.create( {
-        caption, media
-    } )
+export const getPosts = async (req, res) => {
+  let allPosts = await Post.find();
+  res.send(allPosts);
+};
 
+export const updatePost = (req, res) => {
+  res.send("updated");
+};
 
-    res.send( newPost )
-
-
-
-
-}
-
-export const getPosts = async ( req, res ) => {
-
-
-    let allPosts = await Post.find()
-    res.send( allPosts )
-
-
-}
-
-export const updatePost = ( req, res ) => {
-    res.send( 'updated' )
-}
-
-export const deletePost = ( req, res ) => {
-    res.send( 'post deleted' )
-}
+export const deletePost = (req, res) => {
+  res.send("post deleted");
+};

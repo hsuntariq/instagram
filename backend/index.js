@@ -1,21 +1,24 @@
-import express from 'express'
-import cors from 'cors'
-import dotenv from 'dotenv'
-import colors from 'colors'
-import { postRouter } from './apis/postApi.js'
-import { connectDB } from './config/connect.js'
-dotenv.config()
-const app = express()
-app.use( cors() )
+import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+import colors from "colors";
+import { postRouter } from "./apis/postApi.js";
+import { connectDB } from "./config/connect.js";
+import dns from "dns";
 
-connectDB()
+dns.setServers(["8.8.8.8", "8.8.4.4"]);
 
-app.use( express.json() )
-app.use( express.urlencoded() )
+dotenv.config();
+const app = express();
+app.use(cors());
 
-app.use( '/api/posts/', postRouter )
+connectDB();
 
+app.use(express.json());
+app.use(express.urlencoded());
 
-app.listen( process.env.PORT, () => {
-    console.log( `Server started on port:${process.env.PORT.yellow}` )
-} )
+app.use("/api/posts/", postRouter);
+
+app.listen(process.env.PORT, () => {
+  console.log(`Server started on port:${process.env.PORT.yellow}`);
+});
